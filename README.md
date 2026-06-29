@@ -1,2 +1,641 @@
-# vrvillas
-VR Villas — Independent Villas &amp; Homes in Hyderabad
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>VR Villas — Independent Homes Hyderabad</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --navy: #1a1f4b;
+    --gold: #c9a84c;
+    --gold-light: #f0d080;
+    --violet: #6b3fa0;
+    --blue: #2563eb;
+    --white: #ffffff;
+    --cream: #faf8f4;
+    --text: #1e1e2e;
+    --muted: #6b7280;
+    --card-bg: #ffffff;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Inter', sans-serif;
+    color: var(--text);
+    background: var(--cream);
+    overflow-x: hidden;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    background: rgba(26,31,75,0.97);
+    backdrop-filter: blur(10px);
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0 6vw;
+    height: 68px;
+    border-bottom: 1px solid rgba(201,168,76,0.25);
+  }
+  .nav-logo {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.5rem;
+    color: var(--gold);
+    letter-spacing: 1px;
+  }
+  .nav-logo span { color: var(--white); }
+  .nav-links { display: flex; gap: 2rem; list-style: none; }
+  .nav-links a {
+    color: rgba(255,255,255,0.8);
+    text-decoration: none;
+    font-size: 0.875rem;
+    font-weight: 500;
+    letter-spacing: 0.5px;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--gold); }
+  .nav-cta {
+    background: var(--gold);
+    color: var(--navy) !important;
+    padding: 0.5rem 1.25rem;
+    border-radius: 4px;
+    font-weight: 600 !important;
+  }
+  .nav-cta:hover { background: var(--gold-light) !important; color: var(--navy) !important; }
+
+  /* HERO */
+  .hero {
+    min-height: 100vh;
+    background: linear-gradient(135deg, #1a1f4b 0%, #2d1b69 50%, #1a1f4b 100%);
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    text-align: center;
+    padding: 100px 6vw 60px;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23c9a84c' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+  }
+  .hero-badge {
+    display: inline-block;
+    background: rgba(201,168,76,0.15);
+    border: 1px solid rgba(201,168,76,0.4);
+    color: var(--gold);
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    padding: 0.4rem 1rem;
+    border-radius: 20px;
+    margin-bottom: 1.5rem;
+  }
+  .hero h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2.2rem, 6vw, 4rem);
+    color: var(--white);
+    line-height: 1.15;
+    max-width: 800px;
+    margin-bottom: 1.5rem;
+  }
+  .hero h1 em {
+    font-style: normal;
+    color: var(--gold);
+  }
+  .hero p {
+    font-size: clamp(1rem, 2vw, 1.2rem);
+    color: rgba(255,255,255,0.75);
+    max-width: 560px;
+    line-height: 1.7;
+    margin-bottom: 2.5rem;
+  }
+  .hero-btns { display: flex; gap: 1rem; flex-wrap: wrap; justify-content: center; }
+  .btn-primary {
+    background: var(--gold);
+    color: var(--navy);
+    padding: 0.9rem 2rem;
+    border-radius: 6px;
+    font-weight: 700;
+    font-size: 1rem;
+    text-decoration: none;
+    transition: all 0.2s;
+    display: inline-flex; align-items: center; gap: 0.5rem;
+  }
+  .btn-primary:hover { background: var(--gold-light); transform: translateY(-2px); box-shadow: 0 8px 24px rgba(201,168,76,0.3); }
+  .btn-secondary {
+    background: transparent;
+    color: var(--white);
+    padding: 0.9rem 2rem;
+    border-radius: 6px;
+    font-weight: 600;
+    font-size: 1rem;
+    text-decoration: none;
+    border: 1.5px solid rgba(255,255,255,0.4);
+    transition: all 0.2s;
+  }
+  .btn-secondary:hover { border-color: var(--gold); color: var(--gold); }
+
+  .hero-stats {
+    display: flex; gap: 3rem; flex-wrap: wrap; justify-content: center;
+    margin-top: 4rem;
+    padding-top: 2.5rem;
+    border-top: 1px solid rgba(255,255,255,0.1);
+    width: 100%; max-width: 600px;
+  }
+  .stat { text-align: center; }
+  .stat-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 2rem;
+    color: var(--gold);
+    font-weight: 700;
+  }
+  .stat-label {
+    font-size: 0.8rem;
+    color: rgba(255,255,255,0.6);
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    margin-top: 0.25rem;
+  }
+
+  /* SECTIONS */
+  section { padding: 80px 6vw; }
+
+  .section-label {
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 0.75rem;
+  }
+  .section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(1.8rem, 4vw, 2.6rem);
+    color: var(--navy);
+    line-height: 1.2;
+    margin-bottom: 1rem;
+  }
+  .section-sub {
+    font-size: 1rem;
+    color: var(--muted);
+    max-width: 520px;
+    line-height: 1.7;
+  }
+
+  /* WHY SECTION */
+  .why { background: var(--white); }
+  .why-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 2rem;
+    margin-top: 3rem;
+  }
+  .why-card {
+    background: var(--cream);
+    border-radius: 12px;
+    padding: 2rem;
+    border-left: 4px solid var(--gold);
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+  .why-card:hover { transform: translateY(-4px); box-shadow: 0 12px 32px rgba(26,31,75,0.08); }
+  .why-icon { font-size: 2rem; margin-bottom: 1rem; }
+  .why-card h3 { font-size: 1.1rem; font-weight: 600; color: var(--navy); margin-bottom: 0.5rem; }
+  .why-card p { font-size: 0.9rem; color: var(--muted); line-height: 1.6; }
+
+  /* PROPERTIES */
+  .properties { background: var(--cream); }
+  .prop-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1.75rem;
+    margin-top: 3rem;
+  }
+  .prop-card {
+    background: var(--white);
+    border-radius: 14px;
+    overflow: hidden;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+  .prop-card:hover { transform: translateY(-6px); box-shadow: 0 16px 40px rgba(26,31,75,0.12); }
+  .prop-img {
+    height: 200px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 4rem;
+    position: relative;
+  }
+  .prop-img.villa { background: linear-gradient(135deg, #1a1f4b, #2d1b69); }
+  .prop-img.deluxe { background: linear-gradient(135deg, #2d1b69, #6b3fa0); }
+  .prop-img.independent { background: linear-gradient(135deg, #1a3a5c, #2563eb); }
+  .prop-badge {
+    position: absolute; top: 12px; left: 12px;
+    background: var(--gold);
+    color: var(--navy);
+    font-size: 0.7rem;
+    font-weight: 700;
+    padding: 0.3rem 0.75rem;
+    border-radius: 20px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+  }
+  .prop-body { padding: 1.5rem; }
+  .prop-body h3 { font-size: 1.1rem; font-weight: 600; color: var(--navy); margin-bottom: 0.35rem; }
+  .prop-location { font-size: 0.82rem; color: var(--muted); margin-bottom: 1rem; }
+  .prop-features {
+    display: flex; gap: 1rem; flex-wrap: wrap;
+    margin-bottom: 1.25rem;
+  }
+  .prop-feat { font-size: 0.8rem; color: var(--muted); display: flex; align-items: center; gap: 0.3rem; }
+  .prop-price {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.4rem;
+    color: var(--navy);
+    font-weight: 700;
+  }
+  .prop-price span { font-size: 0.8rem; font-family: 'Inter', sans-serif; color: var(--muted); font-weight: 400; }
+  .prop-cta {
+    display: block;
+    margin-top: 1rem;
+    text-align: center;
+    background: var(--navy);
+    color: var(--white);
+    padding: 0.7rem;
+    border-radius: 6px;
+    text-decoration: none;
+    font-size: 0.875rem;
+    font-weight: 600;
+    transition: background 0.2s;
+  }
+  .prop-cta:hover { background: var(--violet); }
+
+  /* WHY INDEPENDENT */
+  .independent { background: var(--navy); }
+  .independent .section-title { color: var(--white); }
+  .independent .section-sub { color: rgba(255,255,255,0.65); }
+  .compare-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+    margin-top: 3rem;
+    max-width: 800px;
+  }
+  .compare-col { }
+  .compare-col h4 {
+    font-size: 0.9rem;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    padding: 0.75rem 1.25rem;
+    border-radius: 8px 8px 0 0;
+    margin-bottom: 0;
+  }
+  .compare-col.apt h4 { background: rgba(255,255,255,0.08); color: rgba(255,255,255,0.5); }
+  .compare-col.ind h4 { background: var(--gold); color: var(--navy); }
+  .compare-list { list-style: none; }
+  .compare-list li {
+    padding: 0.75rem 1.25rem;
+    font-size: 0.9rem;
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+    display: flex; align-items: center; gap: 0.5rem;
+  }
+  .compare-col.apt .compare-list li { color: rgba(255,255,255,0.5); }
+  .compare-col.ind .compare-list li { color: rgba(255,255,255,0.9); }
+  .compare-col.apt .compare-list { background: rgba(255,255,255,0.04); border-radius: 0 0 8px 8px; }
+  .compare-col.ind .compare-list { background: rgba(201,168,76,0.08); border-radius: 0 0 8px 8px; border: 1px solid rgba(201,168,76,0.2); border-top: none; }
+
+  /* HOW IT WORKS */
+  .how { background: var(--white); }
+  .steps {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 2rem;
+    margin-top: 3rem;
+    counter-reset: step;
+  }
+  .step {
+    text-align: center;
+    padding: 2rem 1.5rem;
+    position: relative;
+  }
+  .step-num {
+    width: 52px; height: 52px;
+    background: var(--navy);
+    color: var(--gold);
+    font-family: 'Playfair Display', serif;
+    font-size: 1.4rem;
+    font-weight: 700;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    margin: 0 auto 1.25rem;
+  }
+  .step h3 { font-size: 1rem; font-weight: 600; color: var(--navy); margin-bottom: 0.5rem; }
+  .step p { font-size: 0.875rem; color: var(--muted); line-height: 1.6; }
+
+  /* CONTACT */
+  .contact {
+    background: linear-gradient(135deg, #1a1f4b 0%, #2d1b69 100%);
+    text-align: center;
+  }
+  .contact .section-title { color: var(--white); }
+  .contact .section-sub { color: rgba(255,255,255,0.7); margin: 0 auto 2.5rem; }
+  .contact-cards {
+    display: flex; gap: 1.5rem; flex-wrap: wrap; justify-content: center;
+    margin-top: 2.5rem;
+  }
+  .contact-card {
+    background: rgba(255,255,255,0.08);
+    border: 1px solid rgba(201,168,76,0.25);
+    border-radius: 12px;
+    padding: 1.75rem 2rem;
+    text-align: center;
+    min-width: 200px;
+    text-decoration: none;
+    transition: all 0.2s;
+  }
+  .contact-card:hover { background: rgba(201,168,76,0.15); border-color: var(--gold); transform: translateY(-3px); }
+  .contact-card .icon { font-size: 2rem; margin-bottom: 0.75rem; }
+  .contact-card h4 { color: var(--gold); font-size: 0.8rem; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 0.35rem; }
+  .contact-card p { color: var(--white); font-size: 0.95rem; font-weight: 500; }
+
+  /* FOOTER */
+  footer {
+    background: #0f1230;
+    color: rgba(255,255,255,0.5);
+    text-align: center;
+    padding: 2rem 6vw;
+    font-size: 0.85rem;
+  }
+  footer strong { color: var(--gold); }
+
+  /* MOBILE */
+  @media (max-width: 640px) {
+    .nav-links { display: none; }
+    .compare-grid { grid-template-columns: 1fr; }
+    .hero-stats { gap: 1.5rem; }
+  }
+
+  /* WHATSAPP FLOAT */
+  .wa-float {
+    position: fixed; bottom: 24px; right: 24px; z-index: 999;
+    background: #25D366;
+    color: white;
+    width: 58px; height: 58px;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.6rem;
+    box-shadow: 0 4px 16px rgba(37,211,102,0.4);
+    text-decoration: none;
+    transition: transform 0.2s;
+  }
+  .wa-float:hover { transform: scale(1.1); }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo"><img src="logo.png" alt="VR Villas" style="height:48px; width:auto;"/></div>
+  <ul class="nav-links">
+    <li><a href="#properties">Properties</a></li>
+    <li><a href="#why">Why Independent</a></li>
+    <li><a href="#how">How It Works</a></li>
+    <li><a href="#contact" class="nav-cta">Contact Us</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-badge">Hyderabad's Independent Home Specialists</div>
+  <h1>Your Own Gate.<br/>Your Own Garden.<br/><em>Your Own Life.</em></h1>
+  <p>Premium Independent Villas, Deluxe Homes & Individual Houses in Hyderabad. No shared walls. No apartment rules. Just your space.</p>
+  <div class="hero-btns">
+    <a href="https://wa.me/919866222535" class="btn-primary">📲 WhatsApp Us</a>
+    <a href="#properties" class="btn-secondary">View Properties</a>
+  </div>
+  <div class="hero-stats">
+    <div class="stat">
+      <div class="stat-num">40+</div>
+      <div class="stat-label">Trusted Builders</div>
+    </div>
+    <div class="stat">
+      <div class="stat-num">1.8Cr</div>
+      <div class="stat-label">Starting Price</div>
+    </div>
+    <div class="stat">
+      <div class="stat-num">100%</div>
+      <div class="stat-label">Genuine Listings</div>
+    </div>
+  </div>
+</section>
+
+<!-- WHY VR VILLAS -->
+<section class="why" id="why-us">
+  <div class="section-label">Why Choose Us</div>
+  <h2 class="section-title">Hyderabad's Most Trusted<br/>Independent Home Experts</h2>
+  <p class="section-sub">We connect you directly with verified builders — no middlemen, no hidden charges, just your dream home.</p>
+  <div class="why-grid">
+    <div class="why-card">
+      <div class="why-icon">🏗️</div>
+      <h3>40+ Verified Builders</h3>
+      <p>We work exclusively with trusted builders across Hyderabad who specialize in individual villas and independent houses.</p>
+    </div>
+    <div class="why-card">
+      <div class="why-icon">🔑</div>
+      <h3>Zero Hidden Charges</h3>
+      <p>Complete transparency in every deal. What you see is what you pay — no surprises at registration.</p>
+    </div>
+    <div class="why-card">
+      <div class="why-icon">🎥</div>
+      <h3>Virtual Site Visits</h3>
+      <p>Can't visit in person? We offer live video walkthroughs for NRIs and outstation buyers — see every corner before you decide.</p>
+    </div>
+    <div class="why-card">
+      <div class="why-icon">📋</div>
+      <h3>RERA Verified Properties</h3>
+      <p>Every property we list is RERA registered and legally verified — your investment is always protected.</p>
+    </div>
+    <div class="why-card">
+      <div class="why-icon">🤝</div>
+      <h3>Free Site Visits</h3>
+      <p>We arrange physical site visits at zero cost. See the property, meet the builder, make an informed decision.</p>
+    </div>
+    <div class="why-card">
+      <div class="why-icon">🌍</div>
+      <h3>NRI Friendly</h3>
+      <p>Serving the Indian diaspora in USA, UAE, UK, Australia & more. We handle everything while you're abroad.</p>
+    </div>
+  </div>
+</section>
+
+<!-- PROPERTIES -->
+<section class="properties" id="properties">
+  <div class="section-label">Our Listings</div>
+  <h2 class="section-title">Premium Properties<br/>Across Hyderabad</h2>
+  <p class="section-sub">Handpicked villas and independent homes from our verified builder network.</p>
+  <div class="prop-grid">
+
+    <div class="prop-card">
+      <div class="prop-img villa">
+        🏡
+        <div class="prop-badge">Villa</div>
+      </div>
+      <div class="prop-body">
+        <h3>Luxury Independent Villa</h3>
+        <div class="prop-location">📍 Kompally / Shamshabad, Hyderabad</div>
+        <div class="prop-features">
+          <span class="prop-feat">🛏 4 BHK</span>
+          <span class="prop-feat">📐 300 sq yds</span>
+          <span class="prop-feat">🚗 Car Parking</span>
+          <span class="prop-feat">🌿 Garden</span>
+        </div>
+        <div class="prop-price">₹1.8Cr – 2.5Cr <span>onwards</span></div>
+        <a href="https://wa.me/919866222535?text=Hi VR Villas, I'm interested in the Luxury Villa listing" class="prop-cta">Enquire on WhatsApp</a>
+      </div>
+    </div>
+
+    <div class="prop-card">
+      <div class="prop-img deluxe">
+        🏠
+        <div class="prop-badge">Deluxe Home</div>
+      </div>
+      <div class="prop-body">
+        <h3>Deluxe Independent House</h3>
+        <div class="prop-location">📍 Narsingi / Mokila, Hyderabad</div>
+        <div class="prop-features">
+          <span class="prop-feat">🛏 3 BHK</span>
+          <span class="prop-feat">📐 200 sq yds</span>
+          <span class="prop-feat">🏠 G+1 Floor</span>
+          <span class="prop-feat">🔒 Gated</span>
+        </div>
+        <div class="prop-price">₹1.8Cr – 2.2Cr <span>onwards</span></div>
+        <a href="https://wa.me/919866222535?text=Hi VR Villas, I'm interested in the Deluxe Home listing" class="prop-cta">Enquire on WhatsApp</a>
+      </div>
+    </div>
+
+    <div class="prop-card">
+      <div class="prop-img independent">
+        🏘️
+        <div class="prop-badge">Independent House</div>
+      </div>
+      <div class="prop-body">
+        <h3>2-3 Floor Individual House</h3>
+        <div class="prop-location">📍 Shadnagar / Chevella, Hyderabad</div>
+        <div class="prop-features">
+          <span class="prop-feat">🛏 3-4 BHK</span>
+          <span class="prop-feat">📐 150 sq yds</span>
+          <span class="prop-feat">🏗 G+2 Floor</span>
+          <span class="prop-feat">🌿 Open Space</span>
+        </div>
+        <div class="prop-price">₹1.8Cr – 2.9Cr <span>onwards</span></div>
+        <a href="https://wa.me/919866222535?text=Hi VR Villas, I'm interested in the Independent House listing" class="prop-cta">Enquire on WhatsApp</a>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- WHY INDEPENDENT -->
+<section class="independent" id="why">
+  <div class="section-label">Apartment vs Independent</div>
+  <h2 class="section-title">Why Independent Living<br/>Wins Every Time</h2>
+  <p class="section-sub">Stop settling for a box in the sky. You deserve your own space, on your own terms.</p>
+  <div class="compare-grid">
+    <div class="compare-col apt">
+      <h4>❌ Apartment Life</h4>
+      <ul class="compare-list">
+        <li>😤 Shared walls & noise</li>
+        <li>🅿️ Parking fights daily</li>
+        <li>📋 Society rules & restrictions</li>
+        <li>💸 Monthly maintenance fees</li>
+        <li>🚫 No garden or open space</li>
+        <li>😓 No privacy or independence</li>
+      </ul>
+    </div>
+    <div class="compare-col ind">
+      <h4>✅ VR Villas Life</h4>
+      <ul class="compare-list">
+        <li>🏡 Your own gate & entrance</li>
+        <li>🚗 Private parking always</li>
+        <li>🔑 Your rules, your home</li>
+        <li>💚 No maintenance society</li>
+        <li>🌿 Garden, terrace, open space</li>
+        <li>😊 Total privacy & freedom</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section class="how" id="how">
+  <div class="section-label">Process</div>
+  <h2 class="section-title">How It Works</h2>
+  <p class="section-sub">From first call to keys in hand — we make it simple.</p>
+  <div class="steps">
+    <div class="step">
+      <div class="step-num">1</div>
+      <h3>WhatsApp Us</h3>
+      <p>Tell us your budget, preferred location, and home type. We listen and understand your dream.</p>
+    </div>
+    <div class="step">
+      <div class="step-num">2</div>
+      <h3>Get Matched</h3>
+      <p>We shortlist the best properties from our 40+ builder network that match your requirements.</p>
+    </div>
+    <div class="step">
+      <div class="step-num">3</div>
+      <h3>Site Visit</h3>
+      <p>Free physical or virtual site visit arranged. See every corner before you decide anything.</p>
+    </div>
+    <div class="step">
+      <div class="step-num">4</div>
+      <h3>Move In</h3>
+      <p>We guide you through documentation, registration and handover. Zero stress, full support.</p>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="contact" id="contact">
+  <div class="section-label">Get In Touch</div>
+  <h2 class="section-title">Ready to Find Your Dream Home?</h2>
+  <p class="section-sub">Reach out to us today. Site visits are free. No pressure, just possibilities.</p>
+  <div class="contact-cards">
+    <a href="https://wa.me/919866222535" class="contact-card">
+      <div class="icon">💬</div>
+      <h4>WhatsApp</h4>
+      <p>Chat With Us Now</p>
+    </a>
+    <a href="mailto:vrvillas6@gmail.com" class="contact-card">
+      <div class="icon">📧</div>
+      <h4>Email</h4>
+      <p>vrvillas6@gmail.com</p>
+    </a>
+    <a href="https://facebook.com/VRVillas" class="contact-card">
+      <div class="icon">📘</div>
+      <h4>Facebook</h4>
+      <p>VR Villas</p>
+    </a>
+    <a href="https://instagram.com/vrvillas" class="contact-card">
+      <div class="icon">📸</div>
+      <h4>Instagram</h4>
+      <p>@vrvillas</p>
+    </a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <p>© 2025 <strong>VR Villas</strong> — Independent Living. Better Life. Trusted Choice.</p>
+  <p style="margin-top:0.5rem;">Hyderabad, Telangana &nbsp;|&nbsp; vrvillas6@gmail.com</p>
+</footer>
+
+<!-- WHATSAPP FLOAT -->
+<a href="https://wa.me/919866222535" class="wa-float" title="Chat on WhatsApp">💬</a>
+
+</body>
+</html>
